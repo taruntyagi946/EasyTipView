@@ -44,11 +44,14 @@ public extension EasyTipView {
      - parameter preferences: The preferences which will configure the EasyTipView.
      - parameter delegate:    The delegate.
      */
-    public class func show(animated: Bool = true, forItem item: UIBarItem, withinSuperview superview: UIView? = nil, text: String, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
+    @discardableResult
+    public class func show(animated: Bool = true, forItem item: UIBarItem, withinSuperview superview: UIView? = nil, text: String, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil) -> EasyTipView? {
         
         if let view = item.view {
-            show(animated: animated, forView: view, withinSuperview: superview, text: text, preferences: preferences, delegate: delegate)
+            return show(animated: animated, forView: view, withinSuperview: superview, text: text, preferences: preferences, delegate: delegate)
         }
+        
+        return nil
     }
     
     /**
@@ -61,10 +64,12 @@ public extension EasyTipView {
      - parameter preferences: The preferences which will configure the EasyTipView.
      - parameter delegate:    The delegate.
      */
-    public class func show(animated: Bool = true, forView view: UIView, withinSuperview superview: UIView? = nil, text:  String, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil){
+    @discardableResult
+    public class func show(animated: Bool = true, forView view: UIView, withinSuperview superview: UIView? = nil, text:  String, preferences: Preferences = EasyTipView.globalPreferences, delegate: EasyTipViewDelegate? = nil) -> EasyTipView {
         
         let ev = EasyTipView(text: text, preferences: preferences, delegate: delegate)
         ev.show(animated: animated, forView: view, withinSuperview: superview)
+        return ev
     }
     
     // MARK:- Instance methods -
@@ -78,7 +83,7 @@ public extension EasyTipView {
      */
     public func show(animated: Bool = true, forItem item: UIBarItem, withinSuperView superview: UIView? = nil) {
         if let view = item.view {
-            show(animated: animated, forView: view, withinSuperview: superview)
+            return show(animated: animated, forView: view, withinSuperview: superview)
         }
     }
     
